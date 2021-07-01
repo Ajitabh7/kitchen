@@ -1,2 +1,3 @@
+#! /var/cfengine/bin/python 
 for i in range(5):
-	print("count" + str(i))
+       print("I ranked " + str(i))
