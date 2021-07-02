@@ -4,4 +4,3 @@ if name == 'Ajitabh':
 else:
    print("false")
 print("done")   
-
