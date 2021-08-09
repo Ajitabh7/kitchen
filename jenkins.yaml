@@ -1,0 +1,39 @@
+---
+- name: case study project
+  host: servername
+  gather_facts: true
+  become: true
+  become_method: sudo
+  vars:
+    packages:
+      - wget
+      - openjdk
+      - jenkins
+      -  git
+  tasks:
+   - name: Jenkins and Git installation on Centos Server
+     block:
+      - name: download jenkins.rep
+        get_url:
+           url: http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+           dest: /etc/yum.repos.d/jenkins.repo
+      - name: import jenkins key
+        rpm_key:
+            key: htttps://jenkins-ci.org/redhat/jenkins-ci.org.key
+            state:present
+      - name: package installation
+        yum:
+          name: {{packages}}
+          state: present
+      - name: start and enable Jenkins service
+        systemd:
+           name: jenkins
+           state: started
+           enable: true
+     when: ansible_distribution=="Redhat" and ansible_distribution_version=="7"
+
+   - name: installation of jenkins git and docker packages
+     apt:
+      name: {{packages}}
+      state: present
+     when:  ansible_distribution=="Ubuntu"
