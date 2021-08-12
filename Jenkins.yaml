@@ -12,8 +12,7 @@
   tasks:
    - name: Jenkins and Git installation on Centos Server
      block:
-      - name: download jenkins.rep
-#        command: wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.k                                                                                        ey
+      - name: download jenkins.repo
         get_url:
            url: https://pkg.jenkins.io/redhat/jenkins.repo
            dest: /etc/yum.repos.d/jenkins.repo
